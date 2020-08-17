@@ -1,0 +1,36 @@
+## 2강 모델과 데이터 베이스
+
+### 실습!!!
+
+1.장고 프로젝트 실행 과정과 동일
+  (프로젝트, 앱 여는것 까지 실행)
+  
+2.models.py 에 우리가 만들고자 하는 모델 선언해주기
+
+    class Jss(models.Model):
+      title = models.CharField(max_length=50)
+      content = models.TextField()
+      update_at = models.DateTimeField(auto_now=Ture)
+
+          자주 쓰이는 속성들
+            Primary Key: AutoField
+            문자열: CharField, TextField, SlugField
+            숫자: IntegerField, PositivelntegerField, FloatField
+            날짜/시간: DateField, TimeField, DateTimeField
+            참/거짓: BooleanField, NullBooleanField
+            파일: FileField, ImageField, FilePathField
+
+
+
+3.관련된 저장공간 만들기----->그리고 정보 올리기
+
+ python manage.py makemigrations---->python manage.py migrate
+ 
+ 
+4.admin.py 에 database 알려주기
+
+  from .models import Jss
+
+  admin.site.register(Jss)
+ 
+ 
