@@ -1,0 +1,30 @@
+## 3강 modelform
+
+  --->한마디로 모델에 해당하는 모델폼을 만들면 html을 만들어준다(개꿀!!!)그리고 해당된 요소들을 꾸미게 도와준다
+  
+1. 모델생성
+  ex)Jss 라는 모델을 만들어줌
+        class Jss(models.Model): 
+          objects = models.Manager()
+          title = models.CharField(max_length=50)
+          content = models.TextField()
+          update_at = models.DateTimeField(auto_now=True)
+          author = models.ForeignKey(User,on_delete=models.CASCADE)
+          
+   --->Jss 를 model 에서 가지고 온뒤
+          from .models import Jss
+          
+       form 클라스를 생성한후 문법에 맞게 써준다.
+          class JssForm(forms.ModelForm):
+
+              class Meta:
+                model = Jss
+                fields = ('title', 'content',)
+
+               def __init__(self, *args, **kwargs):
+                    super().__init__(*args, **kwargs)
+                    self.fields['title'].widget.attrs.update({
+                       "class" : 'jss_title',
+                       "placeholder":'제목'
+                       })
+          
