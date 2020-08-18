@@ -1,0 +1,10 @@
+## 4강 primary key
+
+### primary key??
+  한마디로 db에서 각각 class 마다 요소들이 있는데 그 요소들에 붙여지는 이름
+  class 내 요소끼리 중복되지 않는다.
+  crud할때 필수!!
+  
+
+  
+  
