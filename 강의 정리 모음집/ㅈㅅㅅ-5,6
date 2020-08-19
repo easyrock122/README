@@ -5,3 +5,51 @@
 
 --->특징 지금까지와 다른 기능을 만들기 때문에 새로운 app을 생성함
 
+
+#### 그전에 url을 계속 project에 생성하면 약간 드러워??지기 때문에 우리는 각각 앱에 url을 옮겨준다
+
+  
+1) path('',include('main.urls')),
+   path('',include ('accounts.urls'))
+   이런 include를 이용해서 각각 앱에 연동을 시켜준뒤
+2)
+  from django.urls import path
+  from .views import index, create, detail, delete, update, my_index,create_comment,delete_comment
+
+    urlpatterns = [
+       path('', index ,name='index'),
+       path('my_jss',my_index,name="my_index"),
+       path('create/',create,name="create"),
+       path('detail/<int:jss_id>', detail, name="detail"),
+       path('delete/<int:jss_id>', delete, name="delete"),
+       path('update/<int:jss_id>', update, name="update"),
+       path('create_comment/<int:jss_id>',create_comment,name="create_comment"),
+        path('delete_comment/<int:jss_id>/<int:comment_id>',delete_comment,name="delete_comment"),
+    ]   
+  마지막으로 우리가 원하는 url을 앱에 생성후 나열해주면 된다.
+  
+#### 이제 로그인 로그아웃, 회원가입을 만들어 보자
+
+---->위에서 말했듯 우리는 from django.contrib.auth.forms import UserCreationForm
+                     from django.contrib.auth.views import LoginView
+                      이런식으로 로그인과 회원가입폼을 가져와서 이용해 준다
+                      
+                      
+-------->             def signup(request):
+
+                            regi_form = UserCreationForm()
+                            if request.method =="POST":
+                              filled_form = UserCreationForm(request.POST)
+                              if filled_form.is_valid():
+                                 filled_form.save()
+                                 return redirect('index')
+
+
+                            return render(request, 'signup.html',{'regi_form':regi_form})
+
+                    class MyLoginView(LoginView):
+                        template_name = "login.html"
+                        
+                        요런식으로 마무리..
+                        
+                        
